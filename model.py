@@ -3,6 +3,7 @@ import numpy as np
 
 class ImageModel:
     def __init__(self):
+        #keeping Original, Image preview
         self.orig_img = None
         self.curr_img = None    # Committed state
         self.preview = None     # Temporary preview
