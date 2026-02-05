@@ -44,7 +44,7 @@ class AppController:
             return False
         return True
 
-    # --- Sliders ---
+    # --- This is the sliders portion of the project ---
 
     def change_blur(self, val):
         if self.resetting or not self._has_img(): return
@@ -84,7 +84,7 @@ class AppController:
         self.view.set_sliders(0, 0, 0)
         self.resetting = False
 
-    # --- Actions ---
+    # Actions
 
     def apply_grayscale(self):
         if self._has_img():

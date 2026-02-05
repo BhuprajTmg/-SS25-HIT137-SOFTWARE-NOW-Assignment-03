@@ -128,7 +128,7 @@ class UI:
         self.s_bright.set(v2)
         self.s_cont.set(v3)
 
-    # Wrappers for dialogs
+    # It will help in Wrapping for dialogs
     def ask_open(self): 
         return filedialog.askopenfilename(filetypes=[("Images", "*.jpg *.png *.jpeg *.bmp")])
     

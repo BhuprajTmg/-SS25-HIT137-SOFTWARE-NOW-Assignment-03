@@ -3,6 +3,7 @@ import numpy as np
 
 class ImageModel:
     def __init__(self):
+        #keeping and managing Image data and also processing logic
         self.orig_img = None
         self.curr_img = None    # Committed state
         self.preview = None     # Temporary preview
@@ -92,7 +93,7 @@ class ImageModel:
         self.preview = img
 
     def commit(self):
-        """Finalizes the preview into the main image"""
+        """Finalizes the preview into the main image and displaying the point"""
         if self.preview is not None:
             self._push_history()
             self.curr_img = self.preview.copy()
