@@ -5,9 +5,9 @@ class ImageModel:
     def __init__(self):
         #keeping and managing Image data and also processing logic
         self.orig_img = None #using for revert image
-        self.curr_img = None    # Committed state
-        self.preview = None     # Temporary preview
-        self.base_img = None    # Snapshot for sliders
+        self.curr_img = None    # Committed image
+        self.preview = None     
+        self.base_img = None    
         self.filepath = ""
         
         # Slider state
