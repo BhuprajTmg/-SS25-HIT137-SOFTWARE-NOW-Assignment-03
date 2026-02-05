@@ -93,7 +93,7 @@ class ImageModel:
         self.preview = img
 
     def commit(self):
-        """Finalizes the preview into the main image"""
+        """Finalizes the preview into the main image and displaying the point"""
         if self.preview is not None:
             self._push_history()
             self.curr_img = self.preview.copy()
