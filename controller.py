@@ -84,7 +84,7 @@ class AppController:
         self.view.set_sliders(0, 0, 0)
         self.resetting = False
 
-    # --- Actions ---
+    # Actions
 
     def apply_grayscale(self):
         if self._has_img():
