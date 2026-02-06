@@ -56,9 +56,11 @@ class ImageModel:
     # Processing Pipeline 
 
     def reset_params(self):
+        #for Provide predictable resetting the parameters
         self.params = {"blur": 0, "bright": 0, "contrast": 0}
 
     def start_edit(self):
+        #before editing unsures capturing the snapshot
         if self.curr_img is not None:
             self.base_img = self.curr_img.copy()
 
@@ -67,18 +69,19 @@ class ImageModel:
         self.run_pipeline()
 
     def run_pipeline(self):
+        #applying sliders effect in a fixed
         if self.base_img is None: return
 
         img = self.base_img.copy()
         p = self.params
 
-        # Blur
+        # Blur uses odd kernal sizes
         if p["blur"] > 0:
             k = p["blur"]
             if k % 2 == 0: k += 1
             img = cv2.GaussianBlur(img, (k, k), 0)
 
-        # Brightness
+        # Brightness is adjusted in hsv
         if p["bright"] != 0:
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
             h, s, v = cv2.split(hsv)
@@ -97,6 +100,7 @@ class ImageModel:
         self.preview = img
 
     def commit(self):
+        #committing finalizes the preview and records
         """Finalizes the preview into the main image and displaying the point"""
         if self.preview is not None:
             self._push_history()
@@ -107,6 +111,7 @@ class ImageModel:
             self.preview = None
 
     def revert_original(self):
+        #reverting bypasses history and also clean ruturn to orginal
         if self.orig_img is None: return False
         
         self._push_history()
@@ -120,6 +125,7 @@ class ImageModel:
     # Instant Effects 
 
     def apply_gray(self):
+        #Grayscale conversion cannot be undone, therefore the prior condition is consistently noted in the history
         self._push_history()
         gray = cv2.cvtColor(self.curr_img, cv2.COLOR_BGR2GRAY)
         self.curr_img = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
