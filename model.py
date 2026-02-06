@@ -12,7 +12,6 @@ class ImageModel:
         
         # for slider state
         self.params = {"blur": 0, "bright": 0, "contrast": 0}
-        
         self.history = []
         self.redo_list = []
         
@@ -29,7 +28,7 @@ class ImageModel:
         self.base_img = img.copy()
         self.preview = None 
         
-        # Reset stacks
+        # reset stacks
         self.history = []
         self.redo_list = []
         self._push_history()
@@ -38,6 +37,8 @@ class ImageModel:
         return True
 
     def save_image(self, path):
+        #accurate image are used for saving
+        #It display what the user see
         if self.curr_img is None: return False
         
         # Save preview if it exists, otherwise current
@@ -46,12 +47,13 @@ class ImageModel:
         return True
 
     def _push_history(self):
+        #To avoid unintentional histroy makes copies
         if self.curr_img is not None:
             self.history.append(self.curr_img.copy())
             if len(self.history) > 20:
                 self.history.pop(0)
 
-    # --- Processing Pipeline ---
+    # Processing Pipeline 
 
     def reset_params(self):
         self.params = {"blur": 0, "bright": 0, "contrast": 0}
@@ -115,7 +117,7 @@ class ImageModel:
         self.redo_list.clear()
         return True
 
-    # --- Instant Effects ---
+    # Instant Effects 
 
     def apply_gray(self):
         self._push_history()
@@ -152,7 +154,7 @@ class ImageModel:
         self.reset_params()
         self.preview = None
 
-    # --- History ---
+    # History
 
     def undo(self):
         if len(self.history) < 2: return False
