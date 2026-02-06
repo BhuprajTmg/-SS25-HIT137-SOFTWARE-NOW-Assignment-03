@@ -10,12 +10,14 @@ class ImageModel:
         self.base_img = None    
         self.filepath = ""
         
-        # Slider state
+        # for slider state
         self.params = {"blur": 0, "bright": 0, "contrast": 0}
         
         self.history = []
         self.redo_list = []
-
+        
+    #image I/O is centrelized here for loading management
+    #And also make suring that the controller does not directly alter data
     def load_image(self, path):
         img = cv2.imread(path)
         if img is None:
@@ -177,6 +179,7 @@ class ImageModel:
         return True
 
     def get_rgb_display(self):
+        
         target = self.preview if self.preview is not None else self.curr_img
         if target is None: return None
         return cv2.cvtColor(target, cv2.COLOR_BGR2RGB)
