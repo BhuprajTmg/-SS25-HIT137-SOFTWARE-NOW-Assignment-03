@@ -5,6 +5,7 @@ from view import UI
 from controller import AppController
 
 def main():
+    #creating the main tinker window
     root = tk.Tk()
     app = AppController(root, ImageModel, UI)
     root.mainloop()
