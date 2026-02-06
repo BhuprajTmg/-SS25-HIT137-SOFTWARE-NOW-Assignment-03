@@ -163,6 +163,7 @@ class ImageModel:
     # History
 
     def undo(self):
+        # To prevent problems, undo requires at least two states, resulting in the loss of the initial image
         if len(self.history) < 2: return False
         
         self.redo_list.append(self.history.pop())
