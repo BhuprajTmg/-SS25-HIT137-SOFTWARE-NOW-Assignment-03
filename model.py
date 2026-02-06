@@ -179,7 +179,8 @@ class ImageModel:
         return True
 
     def get_rgb_display(self):
-        
+        #tikinter needs RGB images, whereas OpenCV
+        #To maintain Simplicity in the view layer
         target = self.preview if self.preview is not None else self.curr_img
         if target is None: return None
         return cv2.cvtColor(target, cv2.COLOR_BGR2RGB)
