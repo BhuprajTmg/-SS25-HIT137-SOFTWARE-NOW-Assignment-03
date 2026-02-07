@@ -107,21 +107,17 @@ class UI:
         # Get the actual visible dimensions of the canvas
         w = self.canvas.winfo_width()
         h = self.canvas.winfo_height()
-        
-        # Fallback only if the window is somehow minimized or not mapped
-        # We update these to match your window size (1300 - 300 sidebar = 1000)
+
         if w < 10: w, h = 1000, 800
         
-        # Resize image to fit inside the canvas (Aspect Ratio preserved)
+        # Resize image according (Aspect Ratio preserved)
         img = ImageOps.contain(pil_img.copy(), (w, h), Image.Resampling.LANCZOS)
         self.img_cache = ImageTk.PhotoImage(img)
         
         # Clear previous drawing
         self.canvas.delete("all")
         
-        # DRAW IMAGE AT TRUE CENTER
-        # w//2 and h//2 are the center points
-        # anchor=tk.CENTER ensures the image's center sits on that point
+        # DRAW IMAGE AT CENTER
         self.canvas.create_image(w//2, h//2, anchor=tk.CENTER, image=self.img_cache)
 
     def set_sliders(self, v1, v2, v3):
