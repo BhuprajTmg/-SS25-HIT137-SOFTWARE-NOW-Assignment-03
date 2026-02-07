@@ -130,6 +130,7 @@ class UI:
     
     def ask_save(self): 
         return filedialog.asksaveasfilename(defaultextension=".png")
+    
     #It display error message dialog to user
     def show_err(self, msg): 
         messagebox.showerror("Error", msg)
