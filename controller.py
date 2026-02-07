@@ -44,7 +44,7 @@ class AppController:
             return False
         return True
 
-    # --- This is the sliders portion of the project ---
+    #This is the sliders portion of the project
 
     def change_blur(self, val):
         if self.resetting or not self._has_img(): return
