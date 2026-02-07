@@ -91,7 +91,8 @@ class AppController:
         if self._has_img():
             self.model.apply_gray()
             self._post_action_reset()
-
+    
+    # Applied dege detection filter current image state
     def apply_edge(self):
         if self._has_img():
             self.model.apply_edges()
