@@ -56,11 +56,13 @@ class AppController:
         self.model.update_param("bright", int(val))
         self.refresh_view()
 
+    # Update slider callback for contrast adjustment
     def change_contrast(self, val):
         if self.resetting or not self._has_img(): return
         self.model.update_param("contrast", int(val))
         self.refresh_view()
-
+    
+    # Apply current slider adjustments permanently.
     def commit_sliders(self):
         if not self._has_img(): return
         
