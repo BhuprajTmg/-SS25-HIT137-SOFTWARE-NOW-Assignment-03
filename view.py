@@ -92,7 +92,7 @@ class UI:
         tk.Button(box, text="✔ Apply", command=self.app.commit_sliders, bg="#5cb85c", fg="white").pack(side="left", expand=True, fill="x", padx=1)
         tk.Button(box, text="✖ Reset", command=self.app.reset_sliders, bg="#d9534f", fg="white").pack(side="right", expand=True, fill="x", padx=1)
 
-        # Geometry
+        # Geometry of the image
         header("Geometry")
         btn("Rotate 90", lambda: self.app.apply_geometry("rotate", 0))
         btn("Flip H", lambda: self.app.apply_geometry("flip", 1))
@@ -103,7 +103,7 @@ class UI:
         
         self.canvas.update_idletasks()
         
-        # Get the actual visible dimensions of the canvas
+        # This helps generate and set picture graphic.
         w = self.canvas.winfo_width()
         h = self.canvas.winfo_height()
 
