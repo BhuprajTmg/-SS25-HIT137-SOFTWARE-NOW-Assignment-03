@@ -32,7 +32,7 @@ class AppController:
             self.reset_ui_sliders()
             self.refresh_view()
             self.view.status_bar.config(text="Reverted to original.")
-
+    # Update display by converting numpy array to PIL Image
     def refresh_view(self):
         rgb = self.model.get_rgb_display()
         if rgb is not None:
