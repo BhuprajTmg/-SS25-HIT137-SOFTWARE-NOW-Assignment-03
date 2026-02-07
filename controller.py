@@ -50,7 +50,7 @@ class AppController:
         if self.resetting or not self._has_img(): return
         self.model.update_param("blur", int(val))
         self.refresh_view()
-
+    # Update model parameter and refreshes preview in real-time
     def change_brightness(self, val):
         if self.resetting or not self._has_img(): return
         self.model.update_param("bright", int(val))
