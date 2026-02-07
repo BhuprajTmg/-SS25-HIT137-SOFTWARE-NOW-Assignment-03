@@ -98,7 +98,7 @@ class AppController:
             self.model.apply_edges()
             self._post_action_reset()
     
-    # Apply geometric transfomation for special resizing dialog
+    # Apply geometric transfomation for special resizing dialogue
     def apply_geometry(self, op, p):
         if not self._has_img(): return
 
