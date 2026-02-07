@@ -4,18 +4,19 @@ import numpy as np
 class ImageModel:
     def __init__(self):
         #keeping and managing Image data and also processing logic
-        self.orig_img = None
-        self.curr_img = None    # Committed state
-        self.preview = None     # Temporary preview
-        self.base_img = None    # Snapshot for sliders
+        self.orig_img = None #using for revert image
+        self.curr_img = None    # Committed image
+        self.preview = None     
+        self.base_img = None    
         self.filepath = ""
         
-        # Slider state
+        # for slider state
         self.params = {"blur": 0, "bright": 0, "contrast": 0}
-        
         self.history = []
         self.redo_list = []
-
+        
+    #image I/O is centrelized here for loading management
+    #And also make suring that the controller does not directly alter data
     def load_image(self, path):
         img = cv2.imread(path)
         if img is None:
@@ -27,7 +28,7 @@ class ImageModel:
         self.base_img = img.copy()
         self.preview = None 
         
-        # Reset stacks
+        # reset stacks
         self.history = []
         self.redo_list = []
         self._push_history()
@@ -36,6 +37,8 @@ class ImageModel:
         return True
 
     def save_image(self, path):
+        #accurate image are used for saving
+        #It display what the user see
         if self.curr_img is None: return False
         
         # Save preview if it exists, otherwise current
@@ -44,17 +47,20 @@ class ImageModel:
         return True
 
     def _push_history(self):
+        #To avoid unintentional histroy makes copies
         if self.curr_img is not None:
             self.history.append(self.curr_img.copy())
             if len(self.history) > 20:
                 self.history.pop(0)
 
-    # --- Processing Pipeline ---
+    # Processing Pipeline 
 
     def reset_params(self):
+        #for Provide predictable resetting the parameters
         self.params = {"blur": 0, "bright": 0, "contrast": 0}
 
     def start_edit(self):
+        #before editing unsures capturing the snapshot
         if self.curr_img is not None:
             self.base_img = self.curr_img.copy()
 
@@ -63,18 +69,19 @@ class ImageModel:
         self.run_pipeline()
 
     def run_pipeline(self):
+        #applying sliders effect in a fixed
         if self.base_img is None: return
 
         img = self.base_img.copy()
         p = self.params
 
-        # Blur
+        # Blur uses odd kernal sizes
         if p["blur"] > 0:
             k = p["blur"]
             if k % 2 == 0: k += 1
             img = cv2.GaussianBlur(img, (k, k), 0)
 
-        # Brightness
+        # Brightness is adjusted in hsv
         if p["bright"] != 0:
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
             h, s, v = cv2.split(hsv)
@@ -93,6 +100,7 @@ class ImageModel:
         self.preview = img
 
     def commit(self):
+        #committing finalizes the preview and records
         """Finalizes the preview into the main image and displaying the point"""
         if self.preview is not None:
             self._push_history()
@@ -103,6 +111,7 @@ class ImageModel:
             self.preview = None
 
     def revert_original(self):
+        #reverting bypasses history and also clean ruturn to orginal
         if self.orig_img is None: return False
         
         self._push_history()
@@ -113,9 +122,10 @@ class ImageModel:
         self.redo_list.clear()
         return True
 
-    # --- Instant Effects ---
+    # Instant Effects 
 
     def apply_gray(self):
+        #Grayscale conversion cannot be undone, therefore the prior condition is consistently noted in the history
         self._push_history()
         gray = cv2.cvtColor(self.curr_img, cv2.COLOR_BGR2GRAY)
         self.curr_img = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
@@ -150,9 +160,10 @@ class ImageModel:
         self.reset_params()
         self.preview = None
 
-    # --- History ---
+    # History
 
     def undo(self):
+        # To prevent problems, undo requires at least two states, resulting in the loss of the initial image
         if len(self.history) < 2: return False
         
         self.redo_list.append(self.history.pop())
@@ -177,6 +188,8 @@ class ImageModel:
         return True
 
     def get_rgb_display(self):
+        #tikinter needs RGB images, whereas OpenCV
+        #To maintain Simplicity in the view layer
         target = self.preview if self.preview is not None else self.curr_img
         if target is None: return None
         return cv2.cvtColor(target, cv2.COLOR_BGR2RGB)
