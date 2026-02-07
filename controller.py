@@ -115,7 +115,7 @@ class AppController:
         self.reset_ui_sliders()
         self.refresh_view()
 
-    # --- History ---
+    # --- History buttons and actions ---
 
     def undo_action(self):
         if self.model.undo():
