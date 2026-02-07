@@ -19,7 +19,7 @@ class UI:
         self.setup_gui()
 
     def setup_gui(self):
-        #This gives us the configuration of Menu Bar
+        #This gives us the configuration of Menu
         menubar = tk.Menu(self.root)
         self.root.config(menu=menubar)
         
