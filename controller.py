@@ -26,7 +26,7 @@ class AppController:
         path = self.view.ask_save()
         if path and self.model.save_image(path):
             self.view.show_info("Image Saved!")
-
+    # Discharge all edits and restore the original loaded image
     def revert_original(self):
         if self.model.revert_original():
             self.reset_ui_sliders()
