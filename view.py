@@ -31,7 +31,7 @@ class UI:
         file_menu.add_command(label="Exit", command=self.root.quit)
         menubar.add_cascade(label="File", menu=file_menu)
 
-        # Layout Frames
+        # Tihs gives entire layout of the Frames
         self.sidebar = tk.Frame(self.root, width=300, bg=self.panel_col, padx=10, pady=10)
         self.sidebar.pack(side="left", fill="y")
         self.sidebar.pack_propagate(False)
@@ -48,12 +48,12 @@ class UI:
         self.load_controls()
 
     def load_controls(self):
-        # Helper for headers
+        # configures the header 
         def header(txt):
             tk.Label(self.sidebar, text=txt, font=("Arial", 11, "bold"), 
                      bg=self.panel_col, fg="#4a90e2").pack(pady=(15,5), anchor="w")
 
-        # Helper for buttons
+        # confgiures for buttons
         def btn(txt, cmd, col="#555555"):
             tk.Button(self.sidebar, text=txt, command=cmd, bg=col, fg="white", 
                       relief="flat").pack(fill="x", pady=2)
