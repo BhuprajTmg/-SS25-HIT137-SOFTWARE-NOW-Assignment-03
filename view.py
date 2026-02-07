@@ -10,7 +10,7 @@ class UI:
         self.root.title("PyVision Editor")
         self.root.geometry("1300x850")
         
-        # Theme Settings
+        # This is configured for theme settings
         self.bg_col = "#2b2b2b"
         self.panel_col = "#3c3f41"
         self.root.configure(bg=self.bg_col)
@@ -19,7 +19,7 @@ class UI:
         self.setup_gui()
 
     def setup_gui(self):
-        # Menu Bar
+        #This gives us the configuration of Menu Bar
         menubar = tk.Menu(self.root)
         self.root.config(menu=menubar)
         
