@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog, Scale
 from PIL import Image, ImageTk, ImageOps
 
-# Used OOP Concept: Main UI class for managing graphical interface
+#Used OOP Concept: Main UI class for managing graphical interface
 class UI:
     def __init__(self, root, app):
         self.root = root
