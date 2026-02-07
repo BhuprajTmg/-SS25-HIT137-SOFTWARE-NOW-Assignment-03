@@ -101,7 +101,6 @@ class UI:
     def update_image(self, pil_img):
         if not pil_img: return
         
-        # FIX: Force the canvas to update its geometry before we measure it
         self.canvas.update_idletasks()
         
         # Get the actual visible dimensions of the canvas
@@ -131,10 +130,11 @@ class UI:
     
     def ask_save(self): 
         return filedialog.asksaveasfilename(defaultextension=".png")
-    
+    #It display error message dialog to user
     def show_err(self, msg): 
         messagebox.showerror("Error", msg)
     
+    #Simillarly this gives us the information
     def show_info(self, msg): 
         messagebox.showinfo("Info", msg)
         
