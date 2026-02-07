@@ -81,7 +81,6 @@ class AppController:
         self.view.status_bar.config(text="Sliders reset.")
 
     def reset_ui_sliders(self):
-        """Helper to zero out sliders without triggering callbacks"""
         self.resetting = True
         self.view.set_sliders(0, 0, 0)
         self.resetting = False
